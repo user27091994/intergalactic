@@ -1,0 +1,9 @@
+mapping:
+- dir: intergalactic-vpn
+  tag: intergalactic-vpn:latest
+- dir: intergalactic-hacker
+  tag: intergalactic-hacker:latest
+- dir: alpine-3.18-openvpn
+  tag: alpine-3.18-openvpn:latest
+- dir: storage-server
+  tag: storage-server:latest

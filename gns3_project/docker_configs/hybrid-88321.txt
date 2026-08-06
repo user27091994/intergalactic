@@ -1,0 +1,39 @@
+export USER="labuser"
+export PASSWORD="SET_ME_PASSWORD"
+export GROUP="office"
+addgroup -g 500 ${GROUP}
+adduser -Dh /home/${USER} -s /bin/sh -g ${GROUP} -G ${GROUP} ${USER}
+touch /home/${USER}/${USER}-work-files.txt
+echo "${USER}:${PASSWORD}" | chpasswd
+/gns3/bin/udhcpc -x hostname:$HOSTNAME
+cat <<'EOF' > /etc/openvpn/client.conf
+client
+dev tun
+proto udp
+remote 192.168.122.10 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+
+# Redacted for public export.
+<ca>
+REDACTED_CA_CERTIFICATE
+</ca>
+
+<cert>
+REDACTED_CLIENT_CERTIFICATE
+</cert>
+
+<key>
+REDACTED_CLIENT_PRIVATE_KEY
+</key>
+
+cipher AES-256-CBC
+auth SHA256
+comp-lzo
+verb 3
+EOF
+
+nohup openvpn --config /etc/openvpn/client.conf &
+su ${USER}

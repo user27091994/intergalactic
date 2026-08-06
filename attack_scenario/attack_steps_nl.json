@@ -1,0 +1,50 @@
+{
+    "1": {
+        "description": "1Identify the host's Linux distribution and version.",
+        "technique": "T1082: System Information Discovery"
+    },
+    "2": {
+        "description": "Discover the Intergalactic VPN Web UI version.",
+        "technique": "T1016: System Network Configuration Discovery"
+    },
+    "3": {
+        "description": "Create a Shell script (named 'intergalactic_vpn_remote_execution.sh') that builds an HTTP request that uses an admin user and sends a payload to the intergalactic VPN gateway (The payload is the code to run on the gateway server). The script builds a `PAYLOAD` from any arguments passed in (the script can also run with no arguments), creating with Flask‑Unsign a **Flask session cookie** claiming admin privileges (using a hardcoded secret), and then sends a JSON POST to the server. The client name field contains the literal string `intergalactic-hacker; ` followed by whatever `PAYLOAD` is. Save the script as an .sh file to use it later.",
+        "technique": "T1587: Develop Capabilities"
+    },
+    "4": {
+        "description": "Use the intergalactic_vpn_remote_execution.sh script to find the path to the app handler script for generating .ovpn files to create clients on the server. Save the file path for the future.",
+        "technique": "T1119: Automated Collection"
+    },
+    "5": {
+        "description": "Use the intergalactic_vpn_remote_execution.sh script to copy the remote VPN web UI's users database into a web-accessible folder on the server. Then download that database to a local folder with wget.",
+        "technique": "T1555: Credentials from Password Stores"
+    },
+    "6": {
+        "description": "Extract username:password pairs from a the database file. Then try to crack the password hashes with John the Ripper using the wordlist file you have - intergalactic_web_ui_wordlist.txt. Finally, print any username:password results.",
+        "technique": "T1110.002: Brute Force: Password Cracking"
+    },
+    "7": {
+        "description": "Use the intergalactic_vpn_remote_execution.sh script to generate an OpenVPN client profile via the VPN gateway web UI using the VPN gateway hostname as the server and write the generated .ovpn directly into the web server’s static directory. Download the resulting .ovpn configuration file locally and remove the temporary file from the web directory.",
+        "technique": "T1133: External Remote Services"
+    },
+    "8": {
+        "description": "Read the OpenVPN server configuration to extract the VPN subnet (e.g., 10.8.10) and, (5) start an OpenVPN client connection in the background using the downloaded configuration profile. Keep the VPN tunnel operational and confirm that.",
+        "technique": "T1133: External Remote Services"
+    },
+    "9": {
+        "description": "Confirm that the VPN tunnel is operational. Then, identify the VPN gateway IP and the current tunnel IP, and perform an internal reachability survey of the VPN subnet to list responsive hosts while excluding the gateway and the current client IP.",
+        "technique": "T1046: Network Service Scanning"
+    },
+    "10": {
+        "description": "Using the obtained credentials, verify whether SSH access to an internal VPN host is possible and, if successful, list files under the user’s home directory to confirm the session has expected permissions.",
+        "technique": "T1021.004: Remote Services: SSH"
+    },
+    "11": {
+        "description": "Use the obtained credentials to establish an SSH session to an internal jump host, set up a local SSH port-forward to the backup host, then validate end-to-end access by listing files under the user’s home directory on the backup system.",
+        "technique": "T1021.004: Remote Services: SSH"
+    },
+    "12": {
+        "description": "Cleanup",
+        "technique": "T1070.004: File Deletion "
+    }
+}

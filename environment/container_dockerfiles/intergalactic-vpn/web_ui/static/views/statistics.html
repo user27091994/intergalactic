@@ -1,0 +1,25 @@
+<div class="statistics-container">
+  <h2>OpenVPN Statistics</h2>
+  <div class="controls">
+<!--    <label for="refreshPeriod">Refresh Period (ms):</label>-->
+<!--    <input type="number" id="refreshPeriod" ng-model="refreshPeriod" ng-change="updateRefreshPeriod()" min="1000">-->
+    <button ng-click="refresh()">Refresh</button>
+  </div>
+
+  <div ng-if="error" class="error">{{ error }}</div>
+
+  <table ng-if="!error && statistics">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="(key, value) in statistics">
+        <td>{{ key }}</td>
+        <td>{{ value }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

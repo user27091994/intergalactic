@@ -1,0 +1,16 @@
+[project]
+
+name = "intergalactic-vpn"
+version = "0.1.0rc0"
+
+dependencies = [
+    "flask",
+    "openvpn-api",
+    "netifaces",
+]
+
+requires-python = ">=3.8"
+
+
+[tool.setuptools]
+packages = ["web_ui"]

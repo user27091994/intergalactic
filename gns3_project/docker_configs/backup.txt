@@ -1,0 +1,8 @@
+export GROUP="office"
+addgroup -g 500 ${GROUP}
+export USER="labuser"
+export PASSWORD="SET_ME_PASSWORD"
+adduser -Dh /home/${USER} -s /bin/sh -g ${GROUP} -G ${GROUP} ${USER}
+touch /home/${USER}/${USER}-files.txt
+echo "${USER}:${PASSWORD}" | chpasswd
+/gns3/bin/udhcpc -x hostname:$HOSTNAME

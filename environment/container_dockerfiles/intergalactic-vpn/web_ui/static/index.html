@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Intergalactic VPN portal</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- AngularJS and ngRoute from CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+  <script src="/static/js/app.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="overlay"></div>
+    <h1 class="header-title">Intergalactic VPN</h1>
+  </header>
+
+  <!-- Top Bar with Navigation and Logout -->
+<div class="top-bar" ng-controller="TopBarController">
+  <div class="menu">
+    <a href="#!/">Main</a>
+    <a href="#!/clients">Clients</a>
+    <a href="#!/statistics">Statistics</a>
+    <a href="#!/add_client">Add Client</a>
+  </div>
+  <div class="auth-container">
+    <!-- When logged in, show the logout button -->
+    <button ng-if="isLoggedIn" ng-click="logout()">Logout</button>
+    <!-- When not logged in, show a login button -->
+    <a ng-if="!isLoggedIn" href="#!/login">
+      <button>Login</button>
+    </a>
+  </div>
+</div>
+
+  <div class="main-content">
+    <div ng-view></div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 Intergalactic VPN. All rights reserved. Version: 0.1.0rc0.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,80 @@
+**Infrastructure**
+
+* 1 OpenWrt Router with LAN, WAN, and VLAN interfaces
+* 2 Network Switches (Main Switch and Utility Switch) connected to the router
+* 1 standard GNS3 Ethernet switch named `internet-gw` simulating the shared untrusted network
+* 3 Docker Containers for user, server, and VPN gateway roles
+
+**Container Distribution**
+
+**LAN Zone (VLAN 10):**
+
+* 1 User workstation container: `hybrid-88321` (Laptop)
+* 1 File Server container: `backup`
+
+**VPN Zone:**
+
+* 1 VPN Gateway container: `intergalactic-vpn-gw`
+
+**Attacker Zone:**
+
+* 1 Attacker container: `intergalactic-hacker`
+
+**Services & Software**
+
+* **User Workstation (`hybrid-88321`)**:
+
+  * OpenVPN client connected to `intergalactic-vpn-gw`
+  * OpenSSH server running on TCP port 22
+  * Local user account: `labuser`
+
+* **File Server (`backup`)**:
+
+  * SSH file server (SFTP) on TCP port 22
+  * Local user account: `labuser`
+  * Stores user and work files
+
+* **VPN Gateway (`intergalactic-vpn-gw`)**:
+
+  * Intergalactic VPN Gateway is a VPN server accessible from both the internet and the corporate network, enabling remote employees to securely access the corporate network when working off-site.
+  * Intergalactic VPN Gateway can generate OpenVPN configuration files. Users in the internal database can log in to create their own .ovpn file for VPN access. The WebUI is available online via port 80 (HTTP).
+  * The Intergalactic WebUI is vulnerable to CVE-2023-27524, originally identified in Apache Superset. This issue affects the WebUI component.
+  * There’s a local code-execution vulnerability - CVE-zero-dayweb-ui-execute-code-1337 - which can only be triggered after successful exploitation of CVE-2023-27524.
+  * Intergalactic Web UI on HTTP port 80
+  * OpenVPN server on UDP port 1194
+  * Root account for administration
+ 
+* **Intergalactic VPN Web UI**:
+  * Application server - http://192.168.122.10
+  * add_client API endpoint on the VPN gateway - http://192.168.122.10/api/add_client -
+      * Accepts HTTP POST requests.
+      * The client information must be sent in JSON format in the request body, for example: {"client_name": "example-client"}
+      * The endpoint requires authentication - a valid session **Flask** cookie.
+      * The secret key used to sign the Flask cookie as {"user": "admin"} is the string 'REDACTED_PUBLIC_EXPORT_SECRET'.
+      * The application uses a hardcoded Flask signing secret, redacted in this public export.
+  * The app handler script is called 'add_client.sh', it is used for generating .ovpn files to create clients on the server. The script expects exactly two arguments: the SERVER_IP and the CLIENT_NAME, and it prints the entire .ovpn config to stdout (It does not write an .ovpn file to disk unless you redirect stdout). 
+
+
+* **Attacker (`intergalactic-hacker`)**:
+
+  * Simulated attack scripts connecting to VPN gateway
+
+**Network Configuration & Access**
+
+* VLAN 10 configured on router and trunked via main switch
+* DHCP configured for VLAN 10 with static IP for router (`192.168.10.1`)
+* Firewall rules allow traffic from VLAN 10 to WAN
+* User workstation accesses VPN gateway over OpenVPN
+* Attacker simulates unauthorized access to VPN gateway over HTTP and OpenVPN
+* The /app/web_ui/users.db database store contains all remote VPN web UI's users and their MD5 encrypted passwords. 
+* The /app/web_ui/ folder cannot be accessed from outside the server.
+* The /app/web_ui/static/ folder is unsecured and can be accessed from outside the server.
+
+**Assumptions**
+
+* SSH password authentication enabled on all containers
+* All containers in VLAN 10 have LAN connectivity; the external side is simulated as an isolated shared network segment inside GNS3
+* VPN traffic is fully routed between user workstation and VPN gateway
+* Only one attacker VM (`intergalactic-hacker`) attempting to compromise network
+* Standard OpenWrt, Alpine, and Docker container images with minimal hardening
+* Known vulnerabilities present on `intergalactic-vpn-gw` (CVE-2023-27524 and local privilege escalation)

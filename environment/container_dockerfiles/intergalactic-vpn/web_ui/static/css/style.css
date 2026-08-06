@@ -1,0 +1,421 @@
+/* Ensure full height for html and body */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Setup body as a flex container for sticky footer */
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: Arial, sans-serif;
+}
+
+/* Header with fixed height using the logo as a full‑width background */
+.header {
+  width: 100%;
+  min-height: 245px; /* Fixed height based on the logo's natural height */
+  background: url('/static/images/logo.jpeg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+}
+
+/* Overlay on header for a professional tint or gradient */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Header Title Styling */
+.header-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  z-index: 2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Responsive header title for smaller screens */
+@media (max-width: 600px) {
+  .header-title {
+    font-size: 2em;
+  }
+}
+
+/* Main content area grows to fill available space */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Optional container for page content within partials */
+.container {
+  margin: 20px auto;
+  width: 80%;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 5px;
+}
+
+/* Top bar styling for navigation and logout */
+.top-bar {
+  background-color: #1e1e1e;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar .menu a {
+  color: #e0e0e0;
+  margin-right: 15px;
+  text-decoration: none;
+}
+
+.top-bar .menu a:hover {
+  text-decoration: underline;
+}
+
+.top-bar .logout button {
+  background-color: #e53935;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.top-bar .logout button:hover {
+  background-color: #d32f2f;
+}
+
+/* Styling for form inputs and file upload fields */
+input[type="text"],
+input[type="password"] {
+  padding: 8px 12px; /* 8px vertical, 12px horizontal */
+  border: 1px solid #444;
+  border-radius: 3px;
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box; /* Includes padding in the total width */
+}
+
+/* Button styling */
+button {
+  background-color: #1976d2;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1565c0;
+}
+
+/* Global error and message colors */
+.error {
+  color: red;
+}
+
+.message {
+  color: green;
+}
+
+/* Footer styling - naturally pushed to the bottom by flexbox */
+.footer {
+  text-align: center;
+  padding: 15px 0;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+/* Use Roboto for a professional look */
+body, h2, h3, p, li {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Styling for the main page container */
+.main-page {
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 5px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+/* Headings */
+.main-page h2 {
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #e0e0e0;
+}
+
+.main-page h3 {
+  font-size: 1.8em;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #e0e0e0;
+}
+
+/* Paragraph text */
+.main-page p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  text-align: justify;
+  margin-bottom: 30px;
+  color: #e0e0e0;
+}
+
+/* Benefits list */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.benefits-list li {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  padding-left: 25px;
+  position: relative;
+  color: #e0e0e0;
+}
+
+.benefits-list li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #1976d2;
+}
+
+/* Partners logos grid */
+.partners {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.partner-logo {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.partner-logo img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.partner-logo p {
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #e0e0e0;
+}
+
+/* Authentication container for login/logout controls */
+.auth-container {
+  width: 120px;
+  text-align: right;
+}
+
+/* ---------- Login Box ---------- */
+.login-container {
+  width: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #e0e0e0;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #444;
+  border-radius: 3px;
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+  box-sizing: border-box;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1976d2;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #1565c0;
+}
+
+.statistics-container {
+  background-color: #1e1e1e;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.statistics-container h2 {
+  text-align: center;
+  color: #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.statistics-container .controls {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.statistics-container .controls label,
+.statistics-container .controls input,
+.statistics-container .controls button {
+  margin-right: 10px;
+}
+
+.statistics-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.statistics-container th, .statistics-container td {
+  border: 1px solid #444;
+  padding: 8px;
+  text-align: left;
+  color: #e0e0e0;
+}
+
+.statistics-container th {
+  background-color: #2c2c2c;
+}
+
+.clients-container {
+  background-color: #1e1e1e;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.clients-container h2 {
+  text-align: center;
+  color: #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.clients-container .controls {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.clients-container .controls label,
+.clients-container .controls input,
+.clients-container .controls button {
+  margin-right: 10px;
+}
+
+.client-card {
+  background-color: #2c2c2c;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 3px;
+}
+
+.client-card h3 {
+  margin-top: 0;
+  color: #e0e0e0;
+}
+
+.client-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.client-card td {
+  border: 1px solid #444;
+  padding: 8px;
+  color: #e0e0e0;
+}
+
+.add-client-container {
+  background-color: #1e1e1e;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 500px;
+  text-align: center;
+}
+
+.add-client-container h2 {
+  color: #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.add-client-container form {
+  margin-bottom: 15px;
+}
+
+.add-client-container label {
+  display: block;
+  color: #e0e0e0;
+  margin-bottom: 5px;
+}
+
+.add-client-container input[type="text"] {
+  width: 80%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #444;
+  border-radius: 3px;
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+}
+
+.add-client-container button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+}
+
+.add-client-container button:hover {
+  background-color: #1565c0;
+}

@@ -1,0 +1,1 @@
+environment/qemu_images/*.img filter=lfs diff=lfs merge=lfs -text

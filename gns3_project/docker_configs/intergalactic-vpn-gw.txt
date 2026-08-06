@@ -1,0 +1,5 @@
+/app/web_ui/add_user.sh "labuser" "SET_ME_PASSWORD"
+ip link set eth0 up
+ip addr flush dev eth0
+ip addr add 192.168.122.10/24 dev eth0
+ip route replace default via 192.168.122.2
