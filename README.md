@@ -1,3 +1,13 @@
+This repository contains an implementation presented in our paper:
+
+"An LLM-Driven Framework for System-Aware Attack Code Generation"
+
+Authors: Ortal Lavi, Ahmed Elmisery, Ewa Seroczyńska, Igor Podoski, and Andres Murillo.
+
+Publication: Workshop on AI for Cybersecurity (WAITI), ACSAC 2026.
+
+If you use this repository or build upon our work, please cite our paper.
+
 # Intergalactic GNS3 Export
 
 This repository contains the extracted artifacts needed to recreate the `Intergalactic` topology in GNS3.
